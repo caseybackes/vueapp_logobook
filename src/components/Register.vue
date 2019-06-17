@@ -2,9 +2,9 @@
   <div class="login-bg">
     <div class="container">
       <div class="row">
-        <div class="col s12 m8 offset-m2">
+        <div class="ml-auto mr-auto mt-5 col col-sm-8 col-md-6 col-lg-6">
           <div class="login card-panel white black-text center" style="margin-top:3rem; ">
-            <h3>Register with LogoBook</h3>
+            <h3>Sign Up with LogoBook</h3>
             <form id="registration-form">
               <div class="input-field">
                   <input type="text" id="email" required v-model="email" >
@@ -22,7 +22,14 @@
                 <input type="password" id="confPassword" required v-model="confPassword">
                 <label for="confPassword">Confirm Password</label>
               </div>
-              <button class="btn btn-large btn-primary  black-text" v-on:click="register">Sign Up</button>
+              <div class="container center">
+                <button class="btn  btn-primary  white-text  black-text" v-on:click="register">Sign Up</button>
+                <p  style="position:absolute;bottom:0;left:">Already have an account? 
+                  <router-link to="/login" >
+                    Sign In
+                  </router-link>
+                </p>
+              </div>
               
             </form>
           </div>
@@ -77,6 +84,6 @@ import firebase from 'firebase'
     .login-bg{
         background-image:url("https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_645,q_50,w_1600/v1/clients/denver/4f616c91_3217_4da7_807e_ede1e41bf98e_276dbd3a-8822-49ba-9246-41767b077386.jpg");
         background-size:cover;
-        height:90vh;
+        height:93vh;
     }
 </style>

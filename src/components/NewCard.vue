@@ -1,7 +1,10 @@
 <template>
-    <div id="newcard">
-        <h3>New Card Page</h3>
+    <div class="container">
+        <div id="newcard">
+            <h3>New Card Page</h3>
+        </div>
     </div>
+
 </template>
 
 <script>

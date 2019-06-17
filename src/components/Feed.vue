@@ -1,9 +1,11 @@
 <template>
   <div id="feed">
-    <div class="container col-sm-10 center ">
-      <div v-for="(startupCard, index) in startupCards" v-bind:key="startupCard.id" class="maincontainer">
-        <div class="wholeCard center" style="margin-top:40px" v-bind:id="startupCard.id">
-          <div class="front-side card">
+    <div class="col  col-md-8 col-lg-6 center ml-auto mr-auto  ">
+
+      <!-- BEGIN EACH OF THE CARDS -->
+      <div  v-for="(startupCard, index) in startupCards" v-bind:key="startupCard.id">
+        <div class="wholeCard " style="margin-top:40px" v-bind:id="startupCard.id">
+          <div class="front-side card"  style="display:inline-flex">
             <div class="card-bg-img">
               <img class='card-img-top' style="width:100%;"
                 src="https://assets.regus.com/images/nwp/homepage-product-co-working.jpg" alt="">
@@ -113,10 +115,13 @@
 </script>
 
 <style scoped>
+  body{
+    background-color: #ece9e9; 
+  }
   .reaction-icon {
     font-size: 3rem;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     margin-left: .5rem;
     margin-right: .5rem;
     color: dodgerblue;
