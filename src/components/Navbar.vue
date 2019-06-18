@@ -5,12 +5,14 @@
                 <router-link to="/" class="">
                     <div class="float-left mt-3 ml-auto" > <h2>LogoBook</h2></div> 
                 </router-link>
-                <ul class="right">
-                    <li v-if="isLoggedIn"><span class="email"> Welcome, {{currentUser}}! </span></li>
-                    <li v-if="isLoggedIn"><router-link to="/">Feed</router-link></li>
+                <ul class="right flex mr-4" >
+                    <li v-if="isLoggedIn" ><span class="email"> Welcome, {{currentUser}}! </span></li>
+                    <li v-if="isLoggedIn" ><router-link to="/">Feed</router-link></li>
+                    <li v-if="isLoggedIn" ><router-link to="/mycards">My Cards</router-link></li>
                     <li v-if="!isLoggedIn"><router-link to="/login">Login</router-link></li>
                     <li v-if="!isLoggedIn"><router-link to="/register">Register</router-link></li>
-                    <li v-if="isLoggedIn"><button v-on:click="logout" class="btn black">Logout</button></li>
+                    <!-- <li v-if="isLoggedIn"><button v-on:click="logout" class="btn black">Logout</button></li> -->
+                    <li v-if="isLoggedIn" v-on:click="logout"><router-link to="/login">Logout</router-link></li>
                 </ul>
             </div>
         </div>
@@ -25,12 +27,14 @@ export default {
     data() {
         return {
             isLoggedIn: false,
-            currentUser: false
+            currentUser: false,
+            isPrincipal: false
         }
     },
     created() {
         if(firebase.auth().currentUser){
             this.isLoggedIn = true;
+            // if user established a display name on registration, show it in the nav bar. Otherwise, show email. 
             this.currentUser = firebase.auth().currentUser.displayName ?  firebase.auth().currentUser.displayName : firebase.auth().currentUser.email 
         }
     },
@@ -51,4 +55,9 @@ export default {
 .email{
     padding-right:10px;
 }
+*:hover{
+    text-decoration: none;
+    color: aliceblue;
+}
+
 </style>

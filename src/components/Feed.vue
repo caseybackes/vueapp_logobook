@@ -1,20 +1,27 @@
 <template>
   <div id="feed">
+    <div class="container  " style="display:flex;flex:4;margin:auto;justify-content:center">
+      <span class="reaction-icon"><h5>Newest</h5></span>
+      <span class="reaction-icon"><h5>Hottest</h5></span>
+      <span class="reaction-icon"><h5>Mine</h5></span>
+      
+    </div>
     <div class="col  col-md-8 col-lg-6 center ml-auto mr-auto  ">
 
       <!-- BEGIN EACH OF THE CARDS -->
       <div  v-for="(startupCard, index) in startupCards" v-bind:key="startupCard.id">
         <div class="wholeCard " style="margin-top:40px" v-bind:id="startupCard.id">
-          <div class="front-side card"  style="display:inline-flex">
-            <div class="card-bg-img">
+          <div class="front-side card" style="display:inline-flex !important; min-width:200px">
+            <div style="position:relative">
               <img class='card-img-top' style="width:100%;"
-                src="https://assets.regus.com/images/nwp/homepage-product-co-working.jpg" alt="">
+                src="https://assets.regus.com/images/nwp/homepage-product-co-working.jpg" alt="brand image">
+              <div class="flag"></div>
             </div>
             <div class="card-body">
               <h4 class="card-title text-center">{{startupCard.brandTitle}}</h4>
               <p class="card-text text-center">{{startupCard.brandHeading}}</p>
             </div>
-            <div class="container reaction-list">
+            <div class="container reaction-list" style="width:60%">
               <span class="far fa-heart reaction-icon" v-on:click="activateHeart(startupCard)"></span>
               <span class="far fa-comment-dots reaction-icon" v-on:click="activateComments(startupCard)"  data-toggle="collapse" :data-target="'#collapseExample-'+index" aria-expanded="false" aria-controls="'collapseExample-'+index"></span>
               <span class="fab fa-mailchimp reaction-icon"></span>
@@ -59,7 +66,7 @@
 
 <script>
   import db from './firebaseInit'
-//import { constants } from 'fs';
+
   export default {
     name: 'feed',
     data() {
@@ -144,6 +151,21 @@
       background: #e0e0e0;
       color: black;
       justify-content: left;      
+  }
+  .flag{
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 50%;
+    -webkit-clip-path: polygon(50% 50%, 100% 0, 100% 100%, 0 100%, 0 0);
+    clip-path: polygon(50% 50%, 100% 0, 100% 100%, 0 100%, 0 0);
+    /* -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: 1s ease !important;
+    -webkit-transition: 1s ease !important; */
   }
 
 </style>
