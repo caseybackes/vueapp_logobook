@@ -1,16 +1,16 @@
 <template>
   <div id="feed">
-    <div class="container  " style="display:flex;flex:4;margin:auto;justify-content:center">
+    <div class="container" style="display:flex;flex:4;margin:auto;justify-content:center;padding-top:20px">
       <span class="reaction-icon"><h5>Newest</h5></span>
       <span class="reaction-icon"><h5>Hottest</h5></span>
       <span class="reaction-icon"><h5>Mine</h5></span>
       
     </div>
-    <div class="col  col-md-8 col-lg-6 center ml-auto mr-auto  ">
+    <div class="col  col-md-8 col-lg-6 center ml-auto mr-auto  " ar>
 
       <!-- BEGIN EACH OF THE CARDS -->
       <div  v-for="(startupCard, index) in startupCards" v-bind:key="startupCard.id">
-        <div class="wholeCard " style="margin-top:40px" v-bind:id="startupCard.id">
+        <div class="wholeCard " style="margin-top:10px" v-bind:id="startupCard.id">
           <div class="front-side card" style="display:inline-flex !important; min-width:200px">
             <div style="position:relative">
               <img class='card-img-top' style="width:100%;"
