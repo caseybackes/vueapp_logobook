@@ -14,6 +14,7 @@
                     <!-- <li v-if="isLoggedIn"><button v-on:click="logout" class="btn black">Logout</button></li> -->
                     <li v-if="isLoggedIn" v-on:click="logout"><router-link to="/login">Logout</router-link></li>
                 </ul>
+                
             </div>
         </div>
     </nav>

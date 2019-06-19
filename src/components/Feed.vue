@@ -35,21 +35,18 @@
         <!-- this is the collapsable / togglable div for the comments section for each card -->
         <div class="collapse" :id="'collapseExample-'+index">
             <div >
-                <!-- Comment form fields and submission button -->
+                <!-- Comment form -->
               <form >
                   <div class="input-field flex comment-section" style="padding:15px" >
-                      <input type="text"  :id="'submitComment-'+startupCard.brand_id" v-model="commentTextField" placeholder="Join the conversation, or start one!" 
-                        v-on:keyup.enter="submitComment(startupCard.brand_id)">
-                      <button v-on:click="cardComments(startupCard.brand_id)">Console.log => cardComments method</button>
+                      <input type="text"  :id="'submitComment-'+startupCard.brand_id"  placeholder="Join the conversation, or start one!" 
+                         v-on:keyup.enter="submitComment(startupCard.brand_id)">
+                      <!-- <button v-on:click="cardComments(startupCard.brand_id)">Console.log => cardComments method</button> -->
                   </div>
               </form>
           </div>
 
           <!-- START: TESTING MULTI COMMENT LOAD FROM FIREBASE  -->
-          <div v-for="(comment, index) in cardComments(startupCard.brand_id)" v-bind:key="'comment-'+index" class="comment-section card-body">
-              <h3>{{comment.author}} - {{ellapsedTime(comment.createdOn)}}ago</h3>
-              <p>{{comment.content}}</p>
-          </div>
+          <comment v-bind:startupcardid="startupCard.brand_id"></comment>
 
           
           <!-- END: TESTING MULTI COMMENT LOAD FROM FIREBASE  -->
@@ -63,10 +60,14 @@
 <script>
   import db from './firebaseInit'
   import firebase from 'firebase'
-import { constants } from 'fs';
+  import CommentList from './CommentList'
+
 
   export default {
     name: 'feed',
+    components: {
+      'comment':CommentList
+    },
     data() {
       return {
         commentTextField: '',
@@ -82,13 +83,14 @@ import { constants } from 'fs';
             'brandHeading': doc.data().brandHeading,
             'brandDateAdded': doc.data().dateAdded,
             'brandHearts':doc.data().hearts,
-            //'brandComments': doc.data().comments, // works, but lets get this from the new comments collection in each doc
-            //'brandComments': doc.data().collection('comments').get(),
             'brandLocation':doc.data().location
           }
           this.startupCards.push(data)
         })
       })
+
+
+      
     },
     methods: {
         activateHeart: function(startupCard) {
@@ -109,7 +111,6 @@ import { constants } from 'fs';
                 //hearts: heartValUpdate
             //})
         },
-        
         ellapsedTime: function(dateObj){
             var then = dateObj.toDate()
             var now = new Date()
@@ -138,11 +139,7 @@ import { constants } from 'fs';
         submitComment: function(identifier){
           //identifier.preventDefault()
           console.log("identifier sent with 'submitComment method' => " + identifier)
-          let commentid = db.collection('startupCards').doc(identifier).collection('comments').get().then(doc => { 
-              return doc.size+1
-              console.log("comment id generated on number of existing comments in collection: ",commentid)
-            }
-          )
+          
           // Add a new comment document with a generated id.
           let addDoc = db.collection('startupCards').doc(identifier).collection('comments').add({
             author: firebase.auth().currentUser.email,
@@ -153,20 +150,9 @@ import { constants } from 'fs';
           .then(ref => {
             console.log('Added document with ID: ', ref.id);
           })
-        },
-        cardComments: function(cardID){
-          // get all comments from a given card
-          db.collection('startupCards').doc(cardID).collection('comments').get()
-            .then(doc => {
-              let commentsArray = (doc.docs.map(doc => doc.data()))
-              console.log('comments array: ',commentsArray)
-              return commentsArray
-              this.comments.push(commentsArray)
-
-              //return doc.docs.map(doc => doc.data())
-            })
-          // return the array of comments for a card
+          this.commentTextField = ""
         }
+        
     }
   }
 
@@ -204,6 +190,7 @@ import { constants } from 'fs';
       justify-content: left;    
       padding: 5px;  
   }
+
   .flag{
     background: rgba(0, 0, 0, 0.6);
     position: absolute;
