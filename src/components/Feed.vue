@@ -34,16 +34,7 @@
 
         <!-- this is the collapsable / togglable div for the comments section for each card -->
         <div class="collapse" :id="'collapseExample-'+index">
-            <div >
-                <!-- Comment form -->
-              <form >
-                  <div class="input-field flex comment-section" style="padding:15px" >
-                      <input type="text"  :id="'submitComment-'+startupCard.brand_id"  placeholder="Join the conversation, or start one!" 
-                         v-on:keyup.enter="submitComment(startupCard.brand_id)">
-                      <!-- <button v-on:click="cardComments(startupCard.brand_id)">Console.log => cardComments method</button> -->
-                  </div>
-              </form>
-          </div>
+            <newcomment v-bind:startupcardid="startupCard.brand_id"></newcomment>
 
           <!-- START: TESTING MULTI COMMENT LOAD FROM FIREBASE  -->
           <comment v-bind:startupcardid="startupCard.brand_id"></comment>
@@ -61,12 +52,13 @@
   import db from './firebaseInit'
   import firebase from 'firebase'
   import CommentList from './CommentList'
-
+  import NewComment from './NewComment'
 
   export default {
     name: 'feed',
     components: {
-      'comment':CommentList
+      'comment':CommentList,
+      'newcomment':NewComment
     },
     data() {
       return {
@@ -110,47 +102,6 @@
             //db.collection('startupCards').doc(cardID).update({
                 //hearts: heartValUpdate
             //})
-        },
-        ellapsedTime: function(dateObj){
-            var then = dateObj.toDate()
-            var now = new Date()
-            var age = now.getTime() - then.getTime()
-            var years = 1000*3600*24*30*12
-            var months = 1000*3600*24*30
-            var weeks = 1000*3600*24*7
-            var days = 1000*3600*24
-            var hours = 1000*3600
-            var minutes = 1000*60
-            
-            if(age/(years) > 1){
-              return age/(years) >= 2 ? Math.floor(age/years) + " years " : Math.floor(age/years) + " year "
-            } else if(age/months > 1) {
-              return age/months >= 2 ? Math.floor(age/months) + " months " : Math.floor(age/months) + " month "
-            } else if(age/weeks > 1) {
-              return age/weeks >= 2 ? Math.floor(age/weeks) + " weeks " : Math.floor(age/weeks) + " weeks "
-            }else if(age/days > 1) {
-              return age/days >= 2 ? Math.floor(age/days) + " days " : Math.floor(age/days) + " days "
-            }else if(age/hours > 1) {
-              return age/hours >= 2 ? Math.floor(age/hours) + " hours " : Math.floor(age/hours) + " hours "
-            }else if(age/minutes > 1) {
-              return age/minutes >= 2 ? Math.floor(age/minutes) + " minutes " : Math.floor(age/minutes) + " minutes "
-            }
-        },
-        submitComment: function(identifier){
-          //identifier.preventDefault()
-          console.log("identifier sent with 'submitComment method' => " + identifier)
-          
-          // Add a new comment document with a generated id.
-          let addDoc = db.collection('startupCards').doc(identifier).collection('comments').add({
-            author: firebase.auth().currentUser.email,
-            content: this.commentTextField,
-            createdOn: new Date()
-            //commentID:commentid
-          })
-          .then(ref => {
-            console.log('Added document with ID: ', ref.id);
-          })
-          this.commentTextField = ""
         }
         
     }
