@@ -2,12 +2,14 @@
     <div >
         <!-- Comment form -->
         <form >
-            <div class="input-field flex comment-section" style="padding:15px" >
-                <input type="text"  :id="someID"  placeholder="Join the conversation, or start one!" 
-                    v-on:keyup.enter="submitComment(startupCard.brand_id)">
+            <div class="input-field flex comment-section" style="padding:15px;background:white" >
+                <input type="text"  v-model="commentTextField"  placeholder="Join the conversation, or start one!" 
+                    v-on:keyup.enter.prevent="submitComment(startupcardid)">
                 <!-- <button v-on:click="cardComments(startupCard.brand_id)">Console.log => cardComments method</button> -->
             </div>
         </form>
+
+
     </div>
     
 </template>
@@ -21,7 +23,8 @@ export default {
     name:'newcomment',
     data () {
         return {
-            user: firebase.auth().currentUser.email
+            user: firebase.auth().currentUser.email,
+            commentTextField: ""
         }
     },
     created() {
@@ -35,10 +38,11 @@ export default {
           
           // Add a new comment document with a generated id.
           let addDoc = db.collection('startupCards').doc(identifier).collection('comments').add({
+            // update the database with a new document containing submitted comment info
             author: firebase.auth().currentUser.email,
             content: this.commentTextField,
             createdOn: new Date()
-            //commentID:commentid
+            //commentID:commentid // TODO: implement comment id field for searching and updating individual comments
           })
           .then(ref => {
             console.log('Added document with ID: ', ref.id);

@@ -1,10 +1,10 @@
 <template>
     <div class="comment-container container">
         <div class="comment-block" v-for="(comment, index) in comments" :key="index" >
-                <h4>{{comment.author}}</h4>
-                <p class="comment-age" style="font-size:1rem">{{ellapsedTime(comment.createdOn)}} ago</p>
-                <p style="font-size: 1.2rem">{{comment.content}}</p>
-                <p class="comment-edit" v-if="user == comment.author" v-on:click="removeComment(comment.commentID, index)" >Remove</p>
+            <h4>{{comment.author}}</h4>
+            <p class="comment-age" style="font-size:1rem">{{ellapsedTime(comment.createdOn)}} ago</p>
+            <p style="font-size: 1.2rem">{{comment.content}}</p>
+            <p class="comment-edit" v-if="user == comment.author" v-on:click="removeComment(comment.commentID, index)" >Remove</p>
         </div>
     </div>
     
@@ -59,13 +59,15 @@ export default {
             } else if(age/months > 1) {
               return age/months >= 2 ? Math.floor(age/months) + " months " : Math.floor(age/months) + " month "
             } else if(age/weeks > 1) {
-              return age/weeks >= 2 ? Math.floor(age/weeks) + " weeks " : Math.floor(age/weeks) + " weeks "
+              return age/weeks >= 2 ? Math.floor(age/weeks) + " weeks " : Math.floor(age/weeks) + " week "
             }else if(age/days > 1) {
-              return age/days >= 2 ? Math.floor(age/days) + " days " : Math.floor(age/days) + " days "
+              return age/days >= 2 ? Math.floor(age/days) + " days " : Math.floor(age/days) + " day "
             }else if(age/hours > 1) {
-              return age/hours >= 2 ? Math.floor(age/hours) + " hours " : Math.floor(age/hours) + " hours "
+              return age/hours >= 2 ? Math.floor(age/hours) + " hours " : Math.floor(age/hours) + " hour "
             }else if(age/minutes > 1) {
-              return age/minutes >= 2 ? Math.floor(age/minutes) + " minutes " : Math.floor(age/minutes) + " minutes "
+              return age/minutes >= 2 ? Math.floor(age/minutes) + " minutes " : Math.floor(age/minutes) + " minute "
+            } else{
+                return "just a moment "
             }
         },
         removeComment: function(commentID, index){

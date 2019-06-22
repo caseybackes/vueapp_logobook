@@ -4,7 +4,10 @@
       <span class="reaction-icon"><h5>Newest</h5></span>
       <span class="reaction-icon"><h5>Hottest</h5></span>
       <span class="reaction-icon"><h5>Mine</h5></span>
-      
+    </div>
+    <div class="container center" style="margin:auto; color:lightgrey">
+        <h6>The above is not yet implemented</h6>
+
     </div>
     <div class="col  col-md-8 col-lg-6 center ml-auto mr-auto  " ar>
 
@@ -22,8 +25,10 @@
               <p class="card-text text-center">{{startupCard.brandHeading}}</p>
             </div>
             <div class="container reaction-list" style="width:60%">
+              <!-- known ios browser bug/quirk: need to add cursor:pointer on elements that are not typically interactive (here, the comments icon) -->
+              <!-- this is documented in the MDN documentation: https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event#Safari_Mobile -->
               <span class="far fa-heart reaction-icon" v-on:click="activateHeart(startupCard)"></span>
-              <span class="far fa-comment-dots reaction-icon"   data-toggle="collapse" :data-target="'#collapseExample-'+index" aria-expanded="false" aria-controls="'collapseExample-'+index"></span>
+              <span class="far fa-comment-dots reaction-icon"  style="cursor:pointer" data-toggle="collapse" :data-target="'#collapseExample-'+index" href="'#collapseExample-'+index" aria-expanded="false" aria-controls="'collapseExample-'+index"></span>
               <span class="fab fa-mailchimp reaction-icon"></span>
             </div>
           </div>
@@ -37,9 +42,7 @@
             <newcomment v-bind:startupcardid="startupCard.brand_id"></newcomment>
 
           <!-- START: TESTING MULTI COMMENT LOAD FROM FIREBASE  -->
-          <comment v-bind:startupcardid="startupCard.brand_id"></comment>
-
-          
+          <comment v-bind:startupcardid="startupCard.brand_id"></comment>         
           <!-- END: TESTING MULTI COMMENT LOAD FROM FIREBASE  -->
 
         </div>

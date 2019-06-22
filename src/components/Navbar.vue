@@ -35,7 +35,7 @@ export default {
     created() {
         if(firebase.auth().currentUser){
             this.isLoggedIn = true;
-            // if user established a display name on registration, show it in the nav bar. Otherwise, show email. 
+            // if user established a display name on registration, show it in the nav bar. Otherwise, show their registered email. 
             this.currentUser = firebase.auth().currentUser.displayName ?  firebase.auth().currentUser.displayName : firebase.auth().currentUser.email 
         }
     },
