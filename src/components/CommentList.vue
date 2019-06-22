@@ -72,7 +72,7 @@ export default {
         },
         removeComment: function(commentID, index){
             db.collection('startupCards').doc(this.startupcardid).collection('comments').doc(commentID).delete()
-            delete this.comments[index]
+            delete this.comments.splice(index, 1)
         }
     }
 

@@ -1,9 +1,10 @@
 <template>
   <div id="feed">
     <div class="container" style="display:flex;flex:4;margin:auto;justify-content:center;padding-top:20px">
-      <span class="reaction-icon"><h5>Newest</h5></span>
-      <span class="reaction-icon"><h5>Hottest</h5></span>
-      <span class="reaction-icon"><h5>Mine</h5></span>
+      <span @click="sortCardsBy(key='brandDateAdded')" class="reaction-icon"><h5>Newest</h5></span>
+      <span @click="sortCardsBy(key='brandHearts')" class="reaction-icon"><h5>Hottest</h5></span>
+      <span @click="sortCardsBy(key='brand_id')" class="reaction-icon"><h5>Mine</h5></span>
+    
     </div>
     <div class="container center" style="margin:auto; color:lightgrey">
         <h6>The above is not yet implemented</h6>
@@ -105,6 +106,35 @@
             //db.collection('startupCards').doc(cardID).update({
                 //hearts: heartValUpdate
             //})
+        },
+        sortCardsBy: function(key){
+          function compareValues(key, order='asc') {
+            return function(a, b) {
+              if(!a.hasOwnProperty(key) || 
+                !b.hasOwnProperty(key)) {
+                return 0; 
+                console.log('one of these elements does not have the key of ',key)
+              }
+              
+              const varA = (typeof a[key] === 'string') ? 
+                a[key].toUpperCase() : a[key];
+              const varB = (typeof b[key] === 'string') ? 
+                b[key].toUpperCase() : b[key];
+                
+              let comparison = 0;
+              if (varA > varB) {
+                comparison = 1;
+              } else if (varA < varB) {
+                comparison = -1;
+              }
+              return (
+                (order == 'desc') ? 
+                (comparison * -1) : comparison
+              );
+            };
+          }
+            this.startupCards.sort(compareValues(key, 'desc'))
+
         }
         
     }
