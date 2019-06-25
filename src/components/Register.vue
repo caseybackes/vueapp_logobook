@@ -1,6 +1,6 @@
 <template>
   <div class="login-bg">
-        <div class="login-bg" style="">
+    <div class="login-bg" style="">
 
       <div class="container ">
         <div class="row">
@@ -18,17 +18,20 @@
 
             <b-input-group class="mt-1">
               <b-input-group-text slot="prepend"> <i class="fas fa-user-circle"></i></b-input-group-text>
-              <b-form-input type="text" v-model="displayName" aria-required="true" placeholder="Display Name"></b-form-input>
+              <b-form-input type="text" v-model="displayName" aria-required="true" placeholder="Display Name">
+              </b-form-input>
             </b-input-group>
 
             <b-input-group class="mt-1">
               <b-input-group-text slot="prepend"><i class="fas fa-lock"></i></b-input-group-text>
-              <b-form-input type="password" v-model="password" aria-required="true" placeholder="Password"></b-form-input>
+              <b-form-input type="password" v-model="password" aria-required="true" placeholder="Password">
+              </b-form-input>
             </b-input-group>
-            
+
             <b-input-group class="mt-1">
               <b-input-group-text slot="prepend"><i class="fas fa-lock"></i></b-input-group-text>
-              <b-form-input type="password" v-model="confPassword" aria-required="true" placeholder="Confirm Password"></b-form-input>
+              <b-form-input type="password" v-model="confPassword" aria-required="true" placeholder="Confirm Password">
+              </b-form-input>
             </b-input-group>
 
 
@@ -36,7 +39,7 @@
               <b-button type="submit" variant="primary" v-on:click="register">
                 Submit
               </b-button>
-              <p class="text-center mt-2" style="font-size:1rem" >Already have an account?
+              <p class="text-center mt-2" style="font-size:1rem">Already have an account?
                 <router-link to="/login">
                   Sign In
                 </router-link>
@@ -83,7 +86,9 @@
                 }
                 // once registered and logged in, redirect to the feed page
                 this.$router.go({
-                  path: this.$router.push({name: 'feed'})
+                  path: this.$router.push({
+                    name: 'feed'
+                  })
                 })
               },
               err => {

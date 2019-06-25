@@ -67,6 +67,7 @@
         firebase.auth().signInWithEmailAndPassword(this.email, this.password)
           .then(userCred => {
               //alert(`signed in as ${userCred.user.email} with display name of ${userCred.user.displayName}`)
+              console.log('user data: ', userCred)
               this.$router.go({
                 path: this.$router.path
               })

@@ -1,7 +1,7 @@
 <template >
 <div>
   <b-navbar toggleable="lg" type="dark" variant="primary">
-    <b-navbar-brand href="#">Katalize</b-navbar-brand>
+    <b-navbar-brand href="#">(need a cool project name :/ )</b-navbar-brand>
 
     <b-navbar-toggle v-if="isLoggedIn" target="nav-collapse"></b-navbar-toggle>
 

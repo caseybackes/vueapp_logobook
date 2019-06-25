@@ -7,7 +7,7 @@
                     v-on:keyup.enter.prevent="submitComment(startupcardid)">
             </div>
         </form> -->
-    <div class="container pt-2 pb-5" style="background:white; border-bottom: 2px solid dodgerblue;">
+    <div class="container pt-1 pb-1" style="background:white; border-bottom: 2px solid dodgerblue;">
       <b-input-group class="mt-1">
         <b-form-input type="text" v-on:keyup.enter.prevent="submitComment(startupcardid)" v-model="commentTextField"
           placeholder="comment input field" style="height:fit-content">

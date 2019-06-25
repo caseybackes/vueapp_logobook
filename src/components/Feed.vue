@@ -3,7 +3,7 @@
     <div class="container" style="display:flex;flex:4;margin:auto;justify-content:center;padding-top:20px">
       <span @click="sortCardsBy(key='brandDateAdded')" class="reaction-icon"><h5>Newest</h5></span>
       <span @click="sortCardsBy(key='brandHearts')" class="reaction-icon"><h5>Hottest</h5></span>
-      <span @click="sortCardsBy(key='brand_id')" class="reaction-icon"><h5>Mine</h5></span>
+      <span @click="sortCardsBy(key='brandLocation')" class="reaction-icon"><h5>Near Me</h5></span>
     
     </div>
     <div class="container text-center mt-n3 mb-4" style="margin:auto; color:lightgrey">
@@ -29,8 +29,8 @@
               <!-- known ios browser bug/quirk: need to add cursor:pointer on elements that are not typically interactive (here, the comments icon) -->
               <!-- this is documented in the MDN documentation: https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event#Safari_Mobile -->
               <span class="far fa-heart reaction-icon" v-on:click="activateHeart(startupCard)"></span>
-              <span class="far fa-comment-dots reaction-icon"  style="cursor:pointer" data-toggle="collapse" :data-target="'#collapseExample-'+index" href="'#collapseExample-'+index" aria-expanded="false" aria-controls="'collapseExample-'+index"></span>
-              <span class="fab fa-mailchimp reaction-icon"></span>
+              <span class="far fa-comment-dots reaction-icon" data-toggle="collapse" :data-target="'#collapseExample-'+index" href="'#collapseExample-'+index" aria-expanded="false" aria-controls="'collapseExample-'+index"></span>
+              <span class="fab fa-mailchimp reaction-icon" ></span>
             </div>
           </div>
           <div class="back-side">
@@ -40,7 +40,7 @@
 
         <!-- this is the collapsable / togglable div for the comments section for each card -->
         <div class="collapse" :id="'collapseExample-'+index">
-            <newcomment v-bind:startupcardid="startupCard.brand_id"></newcomment>
+          <!-- <newcomment v-bind:startupcardid="startupCard.brand_id"></newcomment> -->
 
           <!-- START: TESTING MULTI COMMENT LOAD FROM FIREBASE  -->
           <commentlist v-bind:startupcardid="startupCard.brand_id"></commentlist>         
@@ -66,7 +66,6 @@
     },
     data() {
       return {
-        commentTextField: '',
         startupCards: []
       }
     },
@@ -84,6 +83,7 @@
           this.startupCards.push(data)
         })
       })
+      console.log('currentUser data: ',firebase.auth().currentUser)
 
 
       
@@ -153,6 +153,7 @@
     margin-left: .5rem;
     margin-right: .5rem;
     color: dodgerblue;
+    cursor: pointer;
   }
 
   .reaction-list {
