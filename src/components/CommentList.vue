@@ -1,10 +1,11 @@
 <template>
     <div class="comment-container container">
         <div class="comment-block" v-for="(comment, index) in comments" :key="index" >
-            <h4>{{comment.author}}</h4>
-            <p class="comment-age" style="font-size:1rem">{{ellapsedTime(comment.createdOn)}} ago</p>
-            <p style="font-size: 1.2rem">{{comment.content}}</p>
-            <p class="comment-edit" v-if="user == comment.author" v-on:click="removeComment(comment.commentID, index)" >Remove</p>
+            <h6 class="card-title">{{comment.author}}</h6 >
+            <p class="comment-age" style="font-size:0.7rem">{{ellapsedTime(comment.createdOn)}} ago</p>
+            <p class="card-text" >{{comment.content}}</p>
+            <p class="comment-edit" style="font-size:.8rem;color:red" v-if="userEmail == comment.author" v-on:click="removeComment(comment.commentID, index)" >Remove</p>
+            
         </div>
     </div>
     
@@ -16,11 +17,11 @@ import firebase, { firestore } from 'firebase'
 
 export default {
     props: ['startupcardid'],
-    name:'comment',
+    name:'commentlist',
     data () {
         return {
             comments: [],
-            user: firebase.auth().currentUser.email
+            userEmail: firebase.auth().currentUser.email
         }
     },
     created() {
@@ -35,7 +36,6 @@ export default {
                     'commentID':doc.id
                 }
                 if(data){
-                    console.log('Casey Backes is a bad-ass code-wielding mother fucker. ...That is all.')
                     this.comments.push(data)
                 }
             })
@@ -90,7 +90,8 @@ export default {
         margin: 0;
     }
     .comment-block{
-        font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+        font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        border-bottom: 2px solid rgb(219, 217, 217);
     }
     h4{
         margin: 0;
@@ -102,5 +103,10 @@ export default {
     }
     .comment-edit{
         cursor: pointer;
+        margin-bottom: 2px;
     }
+    .card-title{
+        margin-bottom: 5px;
+    }
+    
 </style>

@@ -6,7 +6,7 @@
       <span @click="sortCardsBy(key='brand_id')" class="reaction-icon"><h5>Mine</h5></span>
     
     </div>
-    <div class="container center" style="margin:auto; color:lightgrey">
+    <div class="container text-center mt-n3 mb-4" style="margin:auto; color:lightgrey">
         <h6>The above is not yet implemented</h6>
 
     </div>
@@ -43,7 +43,7 @@
             <newcomment v-bind:startupcardid="startupCard.brand_id"></newcomment>
 
           <!-- START: TESTING MULTI COMMENT LOAD FROM FIREBASE  -->
-          <comment v-bind:startupcardid="startupCard.brand_id"></comment>         
+          <commentlist v-bind:startupcardid="startupCard.brand_id"></commentlist>         
           <!-- END: TESTING MULTI COMMENT LOAD FROM FIREBASE  -->
 
         </div>
@@ -61,7 +61,7 @@
   export default {
     name: 'feed',
     components: {
-      'comment':CommentList,
+      'commentlist':CommentList,
       'newcomment':NewComment
     },
     data() {

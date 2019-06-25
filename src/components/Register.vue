@@ -83,7 +83,7 @@
                 }
                 // once registered and logged in, redirect to the feed page
                 this.$router.go({
-                  path: this.$router.path
+                  path: this.$router.push({name: 'feed'})
                 })
               },
               err => {
