@@ -17,9 +17,9 @@
 
          
 
-          <b-input-group class="mt-2">
+          <b-input-group class="mt-2" type="submit">
             <b-input-group-text slot="prepend"><i class="fas fa-lock"></i></b-input-group-text>
-            <b-form-input type="password" v-model="password" placeholder="Password"></b-form-input>
+            <b-form-input type="password" v-model="password" v-on:keyup.enter="login"  placeholder="Password"></b-form-input>
           </b-input-group>
 
 
